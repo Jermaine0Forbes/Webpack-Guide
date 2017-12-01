@@ -3,9 +3,14 @@
 I'm trying to make an easy guide to create a webpack application
 because I know I am going to forget. So...
 
+- [setup typescript][setup]
+- [install jquery into typescript][jquery]
+
+[jquery]:#install-jquery-into-typescript
+[setup]:#typescript
 [home]:#webpack-guide
 
-## SCSS
+## Typescript
 
 - If you have not initialized npm then first do it
 
@@ -16,7 +21,7 @@ npm init
 - after creating the package the json install these packages
 
 ```
-npm i css-loader sass-loader node-sass postcss-loader autoprefixer extract-text-webpack-plugin --save-dev
+npm i ts-loader typescript --save-dev
 ```
 
 - make sure you make webpack global, so that you can run the program by typing it
@@ -36,77 +41,133 @@ touch webpack.config.js
 ```js
 
 var path = require('path');
-const extractPlugin = require('extract-text-webpack-plugin');
-const ex = new extractPlugin('./style.css');
-const autoPrefix = { loader:'postcss-loader',options:{plugins:(loader)=>[require('autoprefixer')()]}};
 
-/*   SASS  */
+/*   TYPESCRIPT  */
 const config = {
-    entry:'./js/sass.js',
+    devtool: 'inline-source-map',
+    entry:'./js/type.js',
     output:{
-        path: path.resolve('css'),
+        path: path.resolve('js'),
         filename:'bundle.js'
+    },
+    resolve:{
+        extensions:['.ts', '.tsx', '.js']
     },
     module:{
         rules:[
             {
-                test:/\.scss$/i,
-                use:ex.extract(['css-loader',autoPrefix,'sass-loader'])
+                test:/\.tsx?$/,
+                loader:'ts-loader'
 
             },
         ]
     },
     watch:true,
-    plugins:[
-        ex
-    ]
+
 }
 
 module.exports = config;
+```
+- create ts config file and add this
 
 ```
+//create the json file
 
-**Just to recap**
-1. The entry property is where the imported files will be bundled together
-2. the watch property will continue to run and bundled the files when a file has been changed
-3. the extract-text-webpack-plugin allows your css to ouput into a regular css file
+touch tsconfig.json
+```
+
+```
+// add this in json file
+{
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+```
 
 - now create a js folder and a js file
 
 ```
-mkdir js ; cd js; touch sass.js
+mkdir js ; cd js; touch type.js
 ```
 
-- also create a sass folder to hold your sass files
+- create a typescript folder to hold your typescript files
 
 ```
-cd ../; mkdir sass
+cd ../; mkdir typescript
 ```
-- create a sass file and add some random sass code
+- create a typescript file and add some random sass code
 
 ```
-touch style.scss
+// create typescript file
+
+touch app.ts
 ```
 
 ```
-$r : red;
+// add typescript code
 
-p{
-    color:$r;
+enum Talk {
+    yes = 1,
+    no = 0,
+    maybe = 2,
+}
+
+function action( message:Talk):void{
+    switch(message){
+        case 0:
+        console.log("you said no");
+        break;
+        case 1:
+        console.log("you said yes");
+        break;
+        case 2:
+        console.log("you said maybe");
+        break;
+    }
 }
 
 ```
 
-- once done with sass code import the location of the sass file into sass.js
+- once done with typescript code import the location of the typescript file into type.js
 
 ```js
-import "../sass/style.scss"
+import "../typescript/app.ts"
 ```
 
 - finally, start webpack and your files should be bundled
 
 ```
 webpack
+```
+
+[go back home][home]
+
+## Install jquery into typescript
+
+**reference**
+- [How to use jQuery with TypeScript](https://stackoverflow.com/questions/32050645/how-to-use-jquery-with-typescript)
+
+- install jquery
+
+```
+npm i --save-dev @types/jquery
+```
+
+- add this property into` tsconfig.json`
+
+```
+"allowSyntheticDefaultImports": true
+```
+
+- add some jquery code into your ts file and you should be all set. If not, then
+add this package just in case
+
+```
+// 1. Install typings
+npm install typings -g
+// 2. Download jquery.d.ts (run this command in the root dir of your project)
+typings install dt~jquery --global --save
 ```
 
 [go back home][home]
