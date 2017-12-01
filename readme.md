@@ -12,31 +12,36 @@ because I know I am going to forget. So...
 
 ## Typescript
 
-- If you have not initialized npm then first do it
+In case you need to see the [documentation](https://www.typescriptlang.org/docs/handbook/basic-types.html) for typescript
+
+**reference**
+- [How to bundle typescript with webpack](https://github.com/TypeStrong/ts-loader)
+
+1. If you have not initialized npm then first do it
 
 ```
 npm init
 ```
 
-- after creating the package the json install these packages
+2. after creating the package the json install these packages
 
 ```
 npm i ts-loader typescript --save-dev
 ```
 
-- make sure you make webpack global, so that you can run the program by typing it
+3. make sure you make webpack global, so that you can run the program by typing it
 
 ```
 npm i webpack -g
 ```
 
-- create webpack config file
+4. create webpack config file
 
 ```
 touch webpack.config.js
 ```
 
-- in the config file paste this information
+5. in the config file paste this information
 
 ```js
 
@@ -68,7 +73,7 @@ const config = {
 
 module.exports = config;
 ```
-- create ts config file and add this
+6. create ts config file and add this
 
 ```
 //create the json file
@@ -85,18 +90,18 @@ touch tsconfig.json
 }
 ```
 
-- now create a js folder and a js file
+7. now create a js folder and a js file
 
 ```
 mkdir js ; cd js; touch type.js
 ```
 
-- create a typescript folder to hold your typescript files
+8. create a typescript folder to hold your typescript files
 
 ```
 cd ../; mkdir typescript
 ```
-- create a typescript file and add some random sass code
+9. create a typescript file and add some random sass code
 
 ```
 // create typescript file
@@ -129,13 +134,13 @@ function action( message:Talk):void{
 
 ```
 
-- once done with typescript code import the location of the typescript file into type.js
+10. once done with typescript code import the location of the typescript file into `type.js`
 
 ```js
 import "../typescript/app.ts"
 ```
 
-- finally, start webpack and your files should be bundled
+11. finally, start webpack and your files should be bundled
 
 ```
 webpack
@@ -148,19 +153,19 @@ webpack
 **reference**
 - [How to use jQuery with TypeScript](https://stackoverflow.com/questions/32050645/how-to-use-jquery-with-typescript)
 
-- install jquery
+1. install jquery
 
 ```
 npm i --save-dev @types/jquery
 ```
 
-- add this property into` tsconfig.json`
+2. add this property into` tsconfig.json`
 
 ```
 "allowSyntheticDefaultImports": true
 ```
 
-- add some jquery code into your ts file and you should be all set. If not, then
+3. add some jquery code into your ts file and you should be all set. If not, then
 add this package just in case
 
 ```
