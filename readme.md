@@ -30,7 +30,7 @@ const autoPrefix = {
 /*   SASS*/
 const config = {
     entry:{
-        main: "./wp-content/themes/test/js/scss.js"
+        main: path.resolve(`${themePath}/scss.js`)
     } 
    ,
     output: {
